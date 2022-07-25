@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class RegisterType extends AbstractType
 {
@@ -20,6 +21,10 @@ class RegisterType extends AbstractType
         $builder
             ->add('firstname', textType::class,[
                 'label' => 'Votre prénom',
+                'constraints'=> new Length([
+                    'min'=>2,
+                    'max'=>30
+                ]),
                 'attr' => [
                     'placeholder' => 'Merci de saisir votre prénom'
                 ]
@@ -27,12 +32,20 @@ class RegisterType extends AbstractType
             ])
             ->add('lastname', TextType::class,[
                 'label' => 'Votre nom',
+                'constraints'=> new Length([
+                    'min'=>2,
+                    'max'=>30
+                ]),
                 'attr' => [
                     'placeholder'=>'Merci de saisir votre nom'
                 ]
             ])
             ->add('email', EmailType::class,[
                 'label'=>'Votre mail',
+                'constraints'=> new Length([
+                    'min'=>2,
+                    'max'=>30
+                ]),
                 'attr' => [
                     'placeholder'=> 'Veuillez entrer votre mail'
                 ]
@@ -43,10 +56,16 @@ class RegisterType extends AbstractType
                 'label'=>'Votre mot de passse',
                 'required'=>true,
                 'first_options'=>[
-                    'label'=>'Mot de passe'
+                    'label'=>'Mot de passe',
+                    'attr'=>[
+                        'placeholder'=>'Veuillez entrez votre mot de passe'
+                    ]
                 ],
                 'second_options'=>[
-                    'label'=>'Confirmez votre le mot de passe'
+                    'label'=>'Confirmez votre le mot de passe',
+                    'attr'=>[
+                        'placeholder'=>'Veuillez confirmez votre le mot de passe'
+                    ]
                 ]])
             
             ->add('submit', SubmitType::class,[
